@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\Flutter Course Early Update\\BarcodeScanning\\Starter\\BarcodeScanningLiveFeed\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-pt-rBR\\values-pt-rBR.xml",
+            "outputFile": "/home/miller/flutter_studies/FlutterBarcodeScanningLiveFeedStarter2022/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-pt-rBR/values-pt-rBR.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\abc\\.gradle\\caches\\transforms-3\\acbce933e4b464a5224ed377a62db1f5\\transformed\\core-1.6.0\\res\\values-pt-rBR\\values-pt-rBR.xml",
+                    "source": "/home/miller/.gradle/caches/transforms-3/acbce933e4b464a5224ed377a62db1f5/transformed/core-1.6.0/res/values-pt-rBR/values-pt-rBR.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -21,24 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\abc\\.gradle\\caches\\transforms-3\\601d4158b382ad9f634d3bbb23a34c83\\transformed\\jetified-play-services-basement-18.0.0\\res\\values-pt-rBR\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "199",
-                        "endColumns": "140",
-                        "endOffsets": "339"
-                    },
-                    "to": {
-                        "startLines": "10",
-                        "startColumns": "4",
-                        "startOffsets": "1067",
-                        "endColumns": "144",
-                        "endOffsets": "1207"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\abc\\.gradle\\caches\\transforms-3\\3ff720be07735976176520d1c05fb799\\transformed\\jetified-play-services-base-18.0.1\\res\\values-pt-rBR\\values.xml",
+                    "source": "/home/miller/.gradle/caches/transforms-3/f568b3e0e4b3738147ed358a145ad2d6/transformed/jetified-play-services-base-18.1.0/res/values-pt-rBR/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -52,6 +35,23 @@
                         "startOffsets": "55,160,308,435,543,710,840,962,1212,1382,1490,1654,1784,1941,2098,2167,2233",
                         "endColumns": "104,147,126,107,166,129,121,104,169,107,163,129,156,156,68,65,83",
                         "endOffsets": "155,303,430,538,705,835,957,1062,1377,1485,1649,1779,1936,2093,2162,2228,2312"
+                    }
+                },
+                {
+                    "source": "/home/miller/.gradle/caches/transforms-3/6b0daa5fb4c2eb7e8b55778df9b972f6/transformed/jetified-play-services-basement-18.1.0/res/values-pt-rBR/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "199",
+                        "endColumns": "140",
+                        "endOffsets": "339"
+                    },
+                    "to": {
+                        "startLines": "10",
+                        "startColumns": "4",
+                        "startOffsets": "1067",
+                        "endColumns": "144",
+                        "endOffsets": "1207"
                     }
                 }
             ]

@@ -23,17 +23,17 @@ class _CameraScreenState extends State<CameraScreen> {
   bool isBusy = false;
   String result = "results will be shown";
 
-  //TODO declare scanner
-  dynamic barcodeScanner;
+  late BarcodeScanner barcodeScanner;
   @override
   void initState() {
     super.initState();
-    //TODO initialize scanner
+
     final List<BarcodeFormat> formats = [BarcodeFormat.all];
+
     barcodeScanner = BarcodeScanner(formats: formats);
 
-    //TODO initialize the controller
     controller = CameraController(_cameras[0], ResolutionPreset.high);
+
     controller.initialize().then((_) {
       if (!mounted) {
         return;
@@ -57,7 +57,51 @@ class _CameraScreenState extends State<CameraScreen> {
   }
 
   //TODO barcode scanning code here
-  doBarcodeScanning() async {}
+  doBarcodeScanning() async {
+    final InputImage inputImage = getInputImage();
+
+    final List<Barcode> barCodes =
+        await barcodeScanner.processImage(inputImage);
+    for (Barcode barCode in barCodes) {
+      final BarcodeType type = barCode.type;
+
+      /*  final Rect boundBox = barCode.boundingBox;
+
+      final String? displayValue = barCode.displayValue;
+
+      final String? rawValue = barCode.rawValue; */
+
+      if (barCode.value != null) {
+        switch (type) {
+          case BarcodeType.wifi:
+            BarcodeWifi? barCodeWifi = barCode.value as BarcodeWifi?;
+
+            if (barCodeWifi != null) {
+              result = 'Wifi: ${barCodeWifi.ssid} ${barCodeWifi.password}';
+            }
+
+            break;
+          case BarcodeType.url:
+            BarcodeUrl? barCodeUrl = barCode.value as BarcodeUrl?;
+
+            if (barCodeUrl != null) {
+              result = 'Url: ${barCodeUrl.url}';
+            }
+
+            break;
+
+          default:
+            result = "results will be shown here";
+            break;
+        }
+      }
+    }
+
+    setState(() {
+      isBusy = false;
+      result;
+    });
+  }
 
   InputImage getInputImage() {
     final WriteBuffer allBytes = WriteBuffer();
@@ -73,27 +117,18 @@ class _CameraScreenState extends State<CameraScreen> {
 
     final inputImageFormat =
         InputImageFormatValue.fromRawValue(img!.format.raw);
+
     // if (inputImageFormat == null) return null;
 
-    final planeData = img!.planes.map(
-      (Plane plane) {
-        return InputImagePlaneMetadata(
-          bytesPerRow: plane.bytesPerRow,
-          height: plane.height,
-          width: plane.width,
-        );
-      },
-    ).toList();
-
-    final inputImageData = InputImageData(
+    final inputImageData = InputImageMetadata(
       size: imageSize,
-      imageRotation: imageRotation!,
-      inputImageFormat: inputImageFormat!,
-      planeData: planeData,
+      rotation: imageRotation!,
+      format: inputImageFormat!,
+      bytesPerRow: img!.width.toInt(),
     );
 
     final inputImage =
-        InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
+        InputImage.fromBytes(bytes: bytes, metadata: inputImageData);
 
     return inputImage;
   }
@@ -110,21 +145,23 @@ class _CameraScreenState extends State<CameraScreen> {
       return Container();
     }
     return MaterialApp(
-      home: Stack(
-        fit: StackFit.expand,
-        children: [
-          CameraPreview(controller),
-          Container(
-            margin: const EdgeInsets.only(left: 10, bottom: 10),
-            child: Align(
-              alignment: Alignment.bottomLeft,
-              child: Text(
-                result,
-                style: const TextStyle(color: Colors.white, fontSize: 25),
+      home: Scaffold(
+        body: Stack(
+          fit: StackFit.expand,
+          children: [
+            CameraPreview(controller),
+            Container(
+              margin: const EdgeInsets.only(left: 10, bottom: 10),
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: Text(
+                  result,
+                  style: const TextStyle(color: Colors.white, fontSize: 25),
+                ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
